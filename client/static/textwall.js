@@ -3050,10 +3050,10 @@ function convertToEmote(msg) {
 		function On() {
 			var e = n;
 			(Ue = Pe["size"]),
-				(Ke["innerText"] = (Ue != 0) ? (Ue + " here") : "No one here"),
+				(Ke["innerText"] = (Ue != 0) ? Ue : "none"),
 				(document.getElementById("chatmsg")["placeholder"] =
 					0 == Ue
-						? "No one is here."
+						? "No one can hear you."
 						: 1 == Ue
 						? "Chat with 1 person."
 						: "Chat with " + Ue + " people."),
@@ -3098,7 +3098,7 @@ function convertToEmote(msg) {
 		}
 		function Hn() {
 			var e = n;
-			(He.innerText = Ce.x + "X, " + -Ce.y + "Y"),
+			(He.innerText = Ce.x + ", " + -Ce.y),
 				Ce.x + qe["offset"].x / v / 10 <= 0 &&
 					Mn(10 * -Ce.x * v, qe["offset"].y),
 				Ce.x + qe["offset"].x / v / 10 >= window["innerWidth"] / at / 10 - 1 &&
