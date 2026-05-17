@@ -342,14 +342,6 @@ body.menu-open #bubbles {
     transition: color 0.3s, text-shadow 0.3s;
 }
 
-#optionsmenu {
-    width: 100%;
-    overflow: auto;
-    -ms-overflow-style: none;
-    overflow-wrap: break-word;
-    scrollbar-width: none;
-    max-height: 526px
-}
 
 /*#sidemenu {
     background-color: rgb(112, 0, 0);
@@ -395,7 +387,7 @@ input {
     transform: translateX(-50%);
     max-width: 400px;
     height: 60px;
-    width: 60%;
+    width: 65%;
     -ms-overflow-style: none;
     scrollbar-width: none;
     background-image: var(--btn-default);
@@ -404,6 +396,12 @@ input {
     border: 1px solid rgba(139, 139, 139, 0.5);
     box-shadow: 0 4px 12px rgba(139, 139, 139, 0.3);
     backdrop-filter: blur(4px);
+}
+#colortabs {
+	display: flex;
+	width: 100vw;
+	height: 30px;
+	flex-direction: row;
 }
 #colourlist {
     border: 0.56px solid #fff;
@@ -1315,6 +1313,10 @@ ul::-webkit-scrollbar-thumb {
     backdrop-filter: blur(4px);
 }
 
+.scroll-right {
+	overflow-x: auto;
+  scrollbar-width: thin;
+}
 
 button,
 input[type="button"],
