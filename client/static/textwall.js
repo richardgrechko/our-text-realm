@@ -139,7 +139,7 @@ window.w = {};
 		const g = document["getElementById"]("toast");
 		var p;
 		const b = document["getElementById"]("clipboard"),
-			x = document["getElementById"]("usermenu"),
+			x = document["getElementById"]("sidemenu"),
 			w = document["getElementById"]("colourlist"),
 			M = document["getElementById"]("teleport");
 		var k = document["getElementById"]("canvas");
@@ -2022,7 +2022,7 @@ window.w = {};
 						t = document["getElementById"]("accountsettings");
 					(t["style"]["display"] =
 						"block" == t["style"]["display"] ? "none" : "block"),
-						(document.getElementById("usermenu")["scrollTop"] =
+						(document.getElementById("sidemenu")["scrollTop"] =
 							t["clientHeight"] - 60);
 				}),
 			document["getElementById"]("changenameform")["addEventListener"](
@@ -2125,7 +2125,7 @@ window.w = {};
 				"click",
 				function (e) {
 					var t = n;
-					e["preventDefault"](), document["getElementById"]("usermenu");
+					e["preventDefault"](), document["getElementById"]("sidemenu");
 					var r = document["getElementById"]("inputmember"),
 						o = document["getElementById"]("memberlist"),
 						i = r.value.toLowerCase();
@@ -2191,7 +2191,7 @@ window.w = {};
 						var t = !1;
 						for (const n of Pe["keys"]()) dn(n), (t = !0);
 						if (t) {
-							var r = document.getElementById("usermenu");
+							var r = document.getElementById("sidemenu");
 							r["scrollTop"] = r["scrollHeight"];
 						}
 					}
