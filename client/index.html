@@ -66,7 +66,7 @@
         </div>
       </div>
     </div>
-    <div id="usermenu" class="hidden">
+    <div id="bubbles-container" class="hidden">
       <div id="sidemenu" class="open" role="dialog">
 			<div class="sidemenu-vertical">
 
@@ -267,37 +267,11 @@
 						<input id="private" type="checkbox" disabled=""><label for="private">Private</label><br>
 						<input id="hidecursors" type="checkbox" disabled=""><label for="hidecursors">Hide cursors</label><br>
 						<input id="disablechat" type="checkbox" disabled=""><label for="disablechat">Disable chat</label><br>
-						<input id="nsfw" type="checkbox" disabled=""><label for="nsfw">NSFW</label><br>
-						<input id="regonly" type="checkbox" disabled=""><label for="regonly">Registered users only</label><br>
 						<input id="walldisablecolour" type="checkbox" disabled=""><label for="walldisablecolour">Disable
 							color</label><br>
 						<input id="disablebraille" type="checkbox" disabled=""><label for="disablebraille">Disable
 							braille</label><br>
 						<hr>
-						<input id="unlisted" type="checkbox" disabled=""><label for="unlisted">Unlisted</label>
-						<br>
-						<small class="tip">(not shown in Explore)</small>
-
-						<br>
-						<input id="webhook" type="checkbox" disabled=""><label for="webhook">Enable webhook</label><br>
-						<small class="tip">Warp to ~textwall/webhooks for usage instructions</small>
-						<br>
-						<div id="api_key" style="display: none;">
-							<span>API Key:</span>
-							<input id="apikey" type="text" readonly="" value="">
-						</div>
-						<hr>
-						<!--
-						<input id="_theme" type="checkbox"><label for="_theme">Custom theme</label><br>
-						<span>Custom wall theme:</span>
-						<br>
-						<br>
-						<button id="wallthemeprotectcustom" data-jscolor="{closeButton: true, closeText: 'Close'}"
-							value="ff0000">Protected cell/tile color</button><br>
-						<br>
-						<button id="wallthemecustom" data-jscolor="{closeButton: true, closeText: 'Close'}"
-							value="ff0000">Normal tile color</button><br>
-						<hr>-->
 						<div id="addmembers" style="display: none;">
 							<h3>Add members</h3>
 							<form>
@@ -340,7 +314,7 @@
 					</div>
       </div>
 		<div id="bubbles">
-			<div class="bubble clickable"><span id="coords">x,y hello</span></div>
+			<div class="bubble clickable"><span id="coords">FIVE FIVE!!!</span></div>
 			<div class="bubble"><img alt="Nearby" src="/static/user.svg" style="max-width: 20px;max-height:20px" class="nohover">
 				<div id="padding"></div><span id="nearby" title="0 online">0</span>
 			</div>
@@ -348,10 +322,9 @@
 			</div>
 			<div id="home" title="Home" class="bubble clickable"><img alt="home" src="/static/home.svg" class="nohover">
 			</div>
-			<div title="Theme" class="bubble clickable" id="theme"><img id="themeico" alt="theme" src="/static/star.svg" class="nohover">
-			</div>
 		</div>
     </div>
+	  
     <div id="connecting">
       <div class="connectingtext">
         <h1 id="connecting1"><noscript>No JavaScript</noscript></h1>
@@ -413,6 +386,9 @@
 					<img alt="Clear" title="Clear" src="/static/clear.svg" class="nohover">
 				</div>
 			</span>
+			
+			<div title="Theme" class="infobtn tool" id="theme"><img id="themeico" alt="theme" src="/static/star.svg" class="nohover">
+			</div>
 
 		</div>
 	</div>
@@ -423,7 +399,6 @@
           <button id="darkcolortab" class="tab-btn">Dark</button>
           <button id="darkercolortab" class="tab-btn">Darker</button>
         </div><br><br></div>
-	  <div class="toolbar-container">
       <div class="colours toolbar">
         <div id="colourlist" class="small-scrollbar colourlist"></div>
     </div>
@@ -437,7 +412,6 @@
     <script>
       console.log("if you're seeing this, the html should have loaded");
     </script>
-    <script src="/static/colors.js"></script>
     <script src="/static/pep.min.js"></script>
     <script src="/static/textwall.js"></script>
   </body>
