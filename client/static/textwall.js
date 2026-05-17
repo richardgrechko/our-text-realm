@@ -1,43 +1,3 @@
-var client = {
-	events: {},
-	on: function (type, call) {
-		if (typeof call != "function") {
-			throw "Callback is not a function";
-		}
-		type = type.toLowerCase();
-		if (!client.events[type]) client.events[type] = [];
-		client.events[type].push(call);
-	},
-	off: function (type, call) {
-		type = type.toLowerCase();
-		if (!client.events[type]) return;
-		while (true) {
-			var idx = client.events[type].indexOf(call);
-			if (idx == -1) break;
-			client.events[type].splice(idx, 1);
-		}
-	},
-	emit: function (type, data) {
-		type = type.toLowerCase();
-		var evt = client.events[type];
-		if (!evt) return;
-		evt.forEach((func) => func(data));
-	},
-	commands: {
-		getid: (args) => {
-			var ids = [];
-			client.cursors.forEach((cursor, id) => {
-				if (cursor.n == args[0]) ids.push(id);
-			});
-			// clientMessage isn't defined 😔
-			clientMessage(ids.join(", "));
-		},
-	},
-	mutedUntil: 0,
-	waitUntilUnmuted: 0
-};
-
-
 let wsUrl = "wss://" + location.host + "/ws";
 
 if (location.protocol !== "https:") {
@@ -54,6 +14,7 @@ function convertToEmote(msg) {
 			: match
 	);
 }
+window.w = {};
 !(function (e) {
 	var t = () => "";
 	(function (e) {
@@ -528,12 +489,12 @@ function convertToEmote(msg) {
 			for (ne = 0; ne < se["length"]; ne++) me[ne] = Yr(se[ne], 0.2);
 			me[se["length"]] = "rgba(255, 255, 255, 0.2)";
 		})();
-		client.color = 0;
+		window.w.color = 0;
 		window.writeBuffer = [];
 		var he,
 			ye,
 			ge,
-			be = Yr(se[client.color], 0.6),
+			be = Yr(se[window.w.color], 0.6),
 			xe = !1,
 			we = new Map(),
 			
@@ -631,7 +592,7 @@ function convertToEmote(msg) {
 				t && ir(Math["round"](100 * at) + "%", 1e3),
 				kn();
 		}
-		client.changeZoom = function(decimal, showUser, save) {
+		window.w.changeZoom = function(decimal, showUser, save) {
 			var r = n;
 			(rt = e),
 				(decimal = Math.round(100 * rt) / 100);
@@ -651,8 +612,8 @@ function convertToEmote(msg) {
 			e &&
 				(localStorage.removeItem("username"),
 				localStorage["removeItem"]("token")),
-				(je = "(" + client.id + ")"),
-				(client.registered = false),
+				(je = "(" + window.w.clientId + ")"),
+				(window.w.registered = false),
 				(j = 0),
 				(X.style["display"] = "none"),
 				a.readyState != a["OPEN"] ||
@@ -1486,14 +1447,14 @@ function convertToEmote(msg) {
 						else if (e["altKey"])
 							1 == Math.sign(e["deltaY"])
 								? mr(
-										client.color == fe[se["length"]]
+										window.w.color == fe[se["length"]]
 											? fe[0]
-											: fe[ve(client.color)]
+											: fe[ve(window.w.color)]
 									)
 								: mr(
-										client.color == fe[0]
+										window.w.color == fe[0]
 											? fe[se["length"]]
-											: fe[ve(client.color)]
+											: fe[ve(window.w.color)]
 									);
 						else {
 							var r = e.deltaX,
@@ -1646,13 +1607,13 @@ function convertToEmote(msg) {
 									if (0 != Be["length"]) {
 										var n = Be["shift"]();
 										(Ce.x = n[0]), (Ce.y = n[1]);
-										var r = client.color,
+										var r = window.w.color,
 											a = ce(),
 											o = Zr(n[3]);
-										(client.color = o[0]),
+										(window.w.color = o[0]),
 											le(o[1]),
 											Vn(n[2], 0, !0) || Be.unshift(n),
-											(client.color = r),
+											(window.w.color = r),
 											le(a);
 									}
 								})(),
@@ -1665,13 +1626,13 @@ function convertToEmote(msg) {
 									if (0 != Fe["length"]) {
 										var t = Fe["shift"]();
 										(Ce.x = t[0]), (Ce.y = t[1]);
-										var n = client.color,
+										var n = window.w.color,
 											a = ce(),
 											o = Zr(t[3]);
-										(client.color = o[0]),
+										(window.w.color = o[0]),
 											le(o[1]),
 											Vn(t[2], 1, !1) || Fe["unshift"](t),
-											(client.color = n),
+											(window.w.color = n),
 											le(a);
 									}
 								})(),
@@ -1814,13 +1775,13 @@ function convertToEmote(msg) {
 					if (0 != Be["length"]) {
 						var n = Be["shift"]();
 						(Ce.x = n[0]), (Ce.y = n[1]);
-						var r = client.color,
+						var r = window.w.color,
 						a = ce(),
 						o = Zr(n[3]);
-						(client.color = o[0]),
+						(window.w.color = o[0]),
 						le(o[1]),
 						Vn(n[2], 0, !0) || Be.unshift(n),
-						(client.color = r),
+						(window.w.color = r),
 						le(a);
 					}
 			}),
@@ -1829,13 +1790,13 @@ function convertToEmote(msg) {
 					if (0 != Fe["length"]) {
 						var t = Fe["shift"]();
 						(Ce.x = t[0]), (Ce.y = t[1]);
-						var n = client.color,
+						var n = window.w.color,
 						a = ce(),
 						o = Zr(t[3]);
-						(client.color = o[0]),
+						(window.w.color = o[0]),
 						le(o[1]),
 						Vn(t[2], 1, !1) || Fe["unshift"](t),
-						(client.color = n),
+						(window.w.color = n),
 						le(a);
 					}
 			}),
@@ -2291,7 +2252,7 @@ function convertToEmote(msg) {
 				gn(),
 					Xe + 300 > performance["now"]()
 						? (r["value"] = "")
-						: client.chat.send(r["value"]["substr"](0, 400)),
+						: window.w.chat.send(r["value"]["substr"](0, 400)),
 					(Xe = performance["now"]()),
 					(r.value = ""),
 					r.focus();
@@ -2468,6 +2429,110 @@ function convertToEmote(msg) {
 			document.getElementById("connecting2").append(a);
 			c.onclick = Kr;
 		}
+		window.network = {};
+        window.network.binary = Or;
+        window.network.text = Rr;
+        window.network.send = function (data) {
+            a.send(window.network.binary(data))
+        };
+        window.network.wsUrl = "wss://" + location.host + "/ws";
+		window.w.chatHistory = [];
+		window.w.on = function (e, t) {
+            if (typeof t != "function") {
+                throw "Callback is not a function";
+            }
+            if (typeof e != "string") {
+                throw "Event name is not a string";
+            }
+            e = e.toLowerCase();
+            if (!this.events[e]) {
+                this.events[e] = [];
+            }
+            this.events[e].push(t);
+        }
+        window.w.on("msg", (data) => {
+            window.w.chatHistory.push(data);
+
+        })
+        window.w.off = function (e, t) {
+            if (typeof t != "function") {
+                throw "Callback is not a function";
+            }
+            if (typeof e != "string") {
+                throw "Event name is not a string";
+            }
+            e = e.toLowerCase();
+            if (!this.events[e]) {
+                return;
+            }
+            const index = this.events[e].indexOf(t);
+            if (index > -1) {
+                this.events[e].splice(index, 1);
+            }
+        }
+        window.w.emit = function (e, ...args) {
+            if (typeof e != "string") {
+                throw "Event name is not a string";
+            }
+            e = e.toLowerCase();
+            if (!this.events[e]) {
+                return;
+            }
+            for (const callback of this.events[e]) {
+                try {
+                    callback(...args);
+                } catch (err) {
+                    console.error("Error in event callback for event " + e, err);
+                }
+            }
+        }
+        window.w.moveCursor = function (direction, amount, doNotAutoPan) {
+            switch (direction) {
+                case "up":
+                    Ce.y -= amount;
+                    break;
+                case "down":
+                    Ce.y += amount;
+                    break;
+                case "left":
+                    Ce.x -= amount;
+                    break;
+                case "right":
+                    Ce.x += amount;
+                    break;
+                default:
+                    throw "Invalid direction";
+                    break;
+            }
+            nr();
+            ie(false);
+            window.w.emit("cursormove", [Ce.x, Ce.y]);
+            if (!doNotAutoPan) Hn();
+        };
+        window.w.moveCursorTo = function (x, y, doNotAutoPan) {
+            Ce.x = x;
+            Ce.y = y;
+            nr();
+            ie(false);
+            window.w.emit("cursormove", [Ce.x, Ce.y]);
+            if (!doNotAutoPan) Hn();
+        };
+        window.w.broadcastReceive = function (force = false) {
+            if (force) {
+                window.w.socket.send(network.binary({ cmd_opt: true }))
+            } else {
+                window.w.socket.send(network.binary({ cmd_opt: false }))
+            }
+        };
+        window.w.cmd = function (data, sendId = true) {
+            if (typeof data == "object") data = JSON.stringify(data);
+            window.w.socket.send(network.binary({
+                cmd: {
+                    data: data,
+                    sendId: sendId
+                }
+            }));
+        }
 		window.addChat = addChat;
 		window.clientMessage = clientMessage;
 		function uppercase(e,t) {
@@ -2609,7 +2674,7 @@ function convertToEmote(msg) {
 			var t = n,
 				r = new Uint8Array(e["data"]).buffer,
 				a = Rr(new Uint8Array(r));
-			client.emit("wsmessage", a);
+			window.w.emit("wsmessage", a);
 			switch (Object["keys"](a)[0]) {
 				case "b":
 					var i = a.b;
@@ -2630,7 +2695,7 @@ function convertToEmote(msg) {
 							: ((o = "/"),
 								Pr()["startsWith"]("@") && history["pushState"]({}, null, o),
 								(J["style"]["display"] = "none")),
-						client.emit("wallchange", getWallName()); // getwallname isnt defined
+						window.w.emit("wallchange", getWallName()); // getwallname isnt defined
 					(Gt = !1),
 						(he = setInterval(Qt, 250)),
 						(ye = setInterval(_t, 2e3)),
@@ -2746,7 +2811,7 @@ function convertToEmote(msg) {
 				case "cu":
 					var I = a.cu,
 						C = I.id;
-					client.emit("cursor", {
+					window.w.emit("cursor", {
 						id: I.id,
 						color: I.c,
 						location: I.l,
@@ -2765,8 +2830,8 @@ function convertToEmote(msg) {
 					break;
 				case "msg":
 					var T = a.msg;
-					client.emit("chat", {
-						username: T[0],
+					window.w.emit("chat", {
+						nick: T[0],
 						color: T[1],
 						message: T[2],
 						registered: T[3],
@@ -3220,7 +3285,7 @@ function convertToEmote(msg) {
 			rainbowModeChange(e.target.value)
 			console.log(rainbowMode)
 		};
-		client.chat = {
+		window.w.chat = {
 			send: (msg) => {
 				msg = msg.toString().slice(0, 400);
 				var args = msg.split(" ");
@@ -3231,9 +3296,6 @@ function convertToEmote(msg) {
 			},
 		};
 		var SERVER = {
-			mutedMessage: () => {
-				addChat("[SERVER]",0b101,"You are muted. Wait for " + client.waitUntilUnmuted.toFixed(2) + " seconds.",true,0);
-			},
 			chat: (e) => {
 				addChat("[SERVER]",0b101,e,true,0);
 			},
@@ -3243,14 +3305,14 @@ function convertToEmote(msg) {
 		window.getCharInfo = getCharInfo;
 		window.teleportTo = vr;
 		window.n = n;
-		client.chunks = we;
-		client.cursors = Pe;
-		client.cursor = Ce;
+		window.w.chunks = we;
+		window.w.cursors = Pe;
+		window.w.cursor = Ce;
 		function getCharInfo(x, y) {
 			var char = {};
 			var chunkX = Math.floor(x / 20) * 20;
 			var chunkY = Math.floor(y / 10) * 10;
-			var chunk = client.chunks.get(chunkX + "," + chunkY);
+			var chunk = window.w.chunks.get(chunkX + "," + chunkY);
 			if (!chunk) return;
 			var i = (y - chunkY) * 20 + (x - chunkX);
 			char.char = chunk.txt[i];
@@ -3285,7 +3347,7 @@ function convertToEmote(msg) {
 			if (
 				((s.protected ||
 					nt["readOnly"]["checked"] ||
-					(U && !client.registered)) &&
+					(U && !window.w.registered)) &&
 					!m &&
 					0 == j) ||
 				null == s["txt"] ||
@@ -3293,7 +3355,7 @@ function convertToEmote(msg) {
 			)
 				return (
 					U &&
-						!client.registered &&
+						!window.w.registered &&
 						!nt["readOnly"]["checked"] &&
 						ir("Please log in before typing.", 3e3),
 					0
@@ -3316,7 +3378,7 @@ function convertToEmote(msg) {
 				E,
 				S = 1,
 				I = a ? 0 : ce(),
-				C = Vr(client.color, I),
+				C = Vr(window.w.color, I),
 				A = Ce.x - c + 20 * (Ce.y - l),
 				T = s["clr"][A],
 				B = Zr(T),
@@ -3334,7 +3396,7 @@ function convertToEmote(msg) {
 						(16 & M) == (16 & E) &&
 						(2 & M) == (2 & E) &&
 						(1 & M) == (1 & E) &&
-						F == client.color) ||
+						F == window.w.color) ||
 					(r
 						? ((g = Ce.x),
 							(p = Ce.y),
@@ -3361,7 +3423,7 @@ function convertToEmote(msg) {
 				S
 			);
 		}
-		function writeCharAt(e, coordX, coordY, color = client.color, r, a) {
+		function writeCharAt(e, coordX, coordY, color = window.w.color, r, a) {
 			var Ce = { x: coordX, y: coordY };
 			var o = n;
 			if (
@@ -3381,7 +3443,7 @@ function convertToEmote(msg) {
 			if (
 				((s.protected ||
 					nt["readOnly"]["checked"] ||
-					(U && !client.registered)) &&
+					(U && !window.w.registered)) &&
 					!m &&
 					0 == j) ||
 				null == s["txt"] ||
@@ -3389,7 +3451,7 @@ function convertToEmote(msg) {
 			)
 				return (
 					U &&
-						!client.registered &&
+						!window.w.registered &&
 						!nt["readOnly"]["checked"] &&
 						ir("Please log in before typing.", 3e3),
 					0
@@ -3430,7 +3492,7 @@ function convertToEmote(msg) {
 						Gn(k) &&
 						(2 & M) == (2 & E) &&
 						(1 & M) == (1 & E) &&
-						F == client.color) ||
+						F == window.w.color) ||
 					(r
 						? ((g = Ce.x),
 							(p = Ce.y),
@@ -3500,7 +3562,7 @@ function convertToEmote(msg) {
 				) {
 					if (((Ie = !0), !er)) {
 						(er = !0), (Ce["start"] = Ce.x);
-						var c = client.color,
+						var c = window.w.color,
 							l = ce();
 						!(function e(n, o) {
 							var u = t;
@@ -3831,7 +3893,7 @@ function convertToEmote(msg) {
 					0 == c.x && 0 == c.y
 						? $n()
 						: (history["pushState"]({}, null, e),
-							client.emit("wallchange", getWallName()));
+							window.w.emit("wallchange", getWallName()));
 			}
 			M["classList"]["remove"]("open");
 		}
@@ -3847,15 +3909,15 @@ function convertToEmote(msg) {
 			var t = n;
 			(tt["disablecolour"]["checked"] || nt["disableColour"]["checked"]) &&
 				(e = 0),
-				client.color != e && (Oe = !0);
-			var r = document.getElementById(client.color);
+				window.w.color != e && (Oe = !0);
+			var r = document.getElementById(window.w.color);
 			r["classList"]["remove"]("selected"),
-				(client.color = e),
+				(window.w.color = e),
 				(be =
-					xe && 0 == client.color
+					xe && 0 == window.w.color
 						? "rgba(255, 255, 255, 0.6)"
-						: Yr(se[client.color], 0.6)),
-				(r = document["getElementById"](client.color))["classList"]["add"](
+						: Yr(se[window.w.color], 0.6)),
+				(r = document["getElementById"](window.w.color))["classList"]["add"](
 					"selected"
 				),
 				r["offsetTop"] < w["scrollTop"] + 36 &&
@@ -3906,7 +3968,7 @@ function convertToEmote(msg) {
 				localStorage.setItem("theme", N),
 				(ge = !0),
 				en(),
-				mr(client.color),
+				mr(window.w.color),
 				Sn();
 				if (xe) {
 				document.getElementById("0").style.backgroundColor = "#ffffff"
@@ -3949,7 +4011,7 @@ function convertToEmote(msg) {
 			}
 			return e != t ? ((ge = !0), Math["round"](e)) : e;
 		}
-		client.setFlushInterval = function(ms) {
+		window.w.flushInterval = function(ms) {
 			clearInterval(flushInterval);
 			flushInterval = setInterval(function() {
 				var e = n;
@@ -3957,7 +4019,7 @@ function convertToEmote(msg) {
 					if ((Le || Oe || Re || De) && 0 != we.size) {
 						var t = {};
 						Le && (t.l = [Ce.x, Ce.y]),
-							Oe && (t.c = client.color),
+							Oe && (t.c = window.w.color),
 							Re && (t.n = tt["anonymous"]["checked"]),
 							De && (t.p = [qe.coords.x, qe.coords.y]),
 							a["send"](Or({
@@ -3993,7 +4055,7 @@ function convertToEmote(msg) {
 				}
 			}, ms);
 		}
-		client.setFlushInterval(200);
+		window.w.flushInterval(200);
 		var wr = performance.now(),
 			Mr = 100,
 			kr = performance["now"]() + 1e3;
@@ -4125,7 +4187,7 @@ function convertToEmote(msg) {
 								ws.readyState == WebSocket.OPEN &&
 								(gt(E),
 								Mt(
-									tt["anonymous"]["checked"] ? "(" + client.id + ")" : je,
+									tt["anonymous"]["checked"] ? "(" + window.w.clientId + ")" : je,
 									y,
 									g,
 									o
@@ -4287,7 +4349,6 @@ function convertToEmote(msg) {
 				(Ce.x = Hr.x), (Ce.y = Hr.y);
 			}
 		function Kr() {
-			if (client.banned) return;
 			var e = n;
 			if (
 				null == a ||
@@ -4295,8 +4356,8 @@ function convertToEmote(msg) {
 					a["readyState"] != WebSocket.OPEN)
 			) {
 
-					((window.ws = a = new WebSocket(wsUrl))["binaryType"] = "arraybuffer"),
-					(client.sendWsMessage = (data) => {
+					((window.w.socket = a = new WebSocket(wsUrl))["binaryType"] = "arraybuffer"),
+					(window.w.socket.send = (data) => {
 						a.send(Or(data));
 					}),
 					(a.onmessage = Tn),
@@ -5043,8 +5104,8 @@ function checkAdminWall(wall) {
 
 var closeReg = document.getElementById("closereg");
 closeReg.onclick = function() {
-	client.sendWsMessage({ closereg: closeReg.checked});
+	window.w.socket.send({ closereg: closeReg.checked});
 }
 
-client.on("wallchange", checkAdminWall);
+window.w.on("wallchange", checkAdminWall);
 console.log("textwall.js has loaded!");
