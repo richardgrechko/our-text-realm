@@ -2340,23 +2340,24 @@ window.w = {};
 		}
 		function In() {
 			var e = n;
-			(document["getElementById"]("connecting1")["innerText"] = "Connected!"),
-				(document["getElementById"]("connecting2")["innerText"] =
-					"Joining wall..."),
-				(document["getElementById"]("admin")["style"]["display"] = "none"),
-				null != localStorage["getItem"]("username") &&
-					null != localStorage["getItem"]("token") &&
-					(vn(!0),
-					(document.getElementById("connecting2").innerText = "Logging in..."),
-					a["send"](
-						Or({
-							token: [
-								localStorage["getItem"]("username"),
-								localStorage["getItem"]("token"),
-							],
-						})
-					));
-			client.serverClosed = false;
+            En(),
+                m = !1,
+                Gt = !1,
+                H = "",
+                W = "",
+                pn(),
+                gn(),
+                c["style"]["display"] = "flex",
+                setTimeout((function () {
+                    var t = e;
+                    c["style"]["opacity"] = "100%"
+                }
+                ), 50),
+                clearInterval(he),
+                clearInterval(ye),
+                nr(),
+                document["getElementById"]("connecting1").innerText = "Disconnected.",
+                document["getElementById"]("connecting2")["innerText"] = "Click anywhere to reconnect.";
 			var t = "textwall",
 				r = "main",
 				o = location["pathname"]["split"]("/")["splice"](1, 2);
