@@ -554,7 +554,6 @@ window.w = {};
 			showothercurs: document.getElementById("showothercurs"),
 			shownametags: document["getElementById"]("shownametags"),
 			showchat: document["getElementById"]("showchat"),
-			hideguestchat: document["getElementById"]("hideguestchat"),
 			disablecolour: document.getElementById("disablecolour"),
 			smoothpanning: document["getElementById"]("smoothpanning"),
 			smoothcursors: document.getElementById("smoothcursors"),
@@ -1843,9 +1842,6 @@ window.w = {};
 					case tt["smoothcursors"]:
 						localStorage["setItem"]("smoothcursors", r);
 						break;
-					case tt["hideguestchat"]:
-						localStorage["setItem"]("hideguestchat", r);
-						break;
 					case tt["copycolour"]:
 						localStorage["setItem"]("copycolour", r);
 						break;
@@ -2838,9 +2834,7 @@ window.w = {};
 						registered: T[3],
 						id: T[4],
 					});
-					if (!(T[0].startsWith("(") && tt["hideguestchat"]["checked"])) {
 					addChat(T[0], T[1], T[2], T[3], T[4]);
-					}
 					break;
 				case "rc":
 					Pe["delete"](a.rc), (ge = !0), On();
