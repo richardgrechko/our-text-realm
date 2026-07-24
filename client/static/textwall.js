@@ -2420,120 +2420,6 @@ window.w = {};
 			document.getElementById("connecting2").append(a);
 			c.onclick = Kr;
 		}
-		
-		window.network = {};
-        window.network.binary = Or;
-        window.network.text = Rr;
-        window.network.send = function (data) {
-            a.send(window.network.binary(data))
-        };
-        window.network.wsUrl = "wss://" + location.host + "/ws";
-		window.w.socket = {}
-        Object.defineProperty(window.w, "socket", {
-            get: function () { return a }
-        });
-		window.w.chatHistory = [];
-		window.w.events = {};
-		window.w.on = function (e, t) {
-            if (typeof t != "function") {
-                throw "Callback is not a function";
-            }
-            if (typeof e != "string") {
-                throw "Event name is not a string";
-            }
-            e = e.toLowerCase();
-            if (!this.events[e]) {
-                this.events[e] = [];
-            }
-            this.events[e].push(t);
-        }
-        window.w.on("chat", (data) => {
-            window.w.chatHistory.push(data);
-
-        })
-        window.w.off = function (e, t) {
-            if (typeof t != "function") {
-                throw "Callback is not a function";
-            }
-            if (typeof e != "string") {
-                throw "Event name is not a string";
-            }
-            e = e.toLowerCase();
-            if (!this.events[e]) {
-                return;
-            }
-            const index = this.events[e].indexOf(t);
-            if (index > -1) {
-                this.events[e].splice(index, 1);
-            }
-        }
-		
-        window.w.emit = function (e, ...args) {
-            if (typeof e != "string") {
-                throw "Event name is not a string";
-            }
-            e = e.toLowerCase();
-            if (!this.events[e]) {
-                return;
-            }
-            for (const callback of this.events[e]) {
-                try {
-                    callback(...args);
-                } catch (err) {
-                    console.error("Error in event callback for event " + e, err);
-                }
-            }
-        }
-		
-        window.w.moveCursor = function (direction, amount, doNotAutoPan) {
-            switch (direction) {
-                case "up":
-                    Ce.y -= amount;
-                    break;
-                case "down":
-                    Ce.y += amount;
-                    break;
-                case "left":
-                    Ce.x -= amount;
-                    break;
-                case "right":
-                    Ce.x += amount;
-                    break;
-                default:
-                    throw "Invalid direction";
-                    break;
-            }
-            nr();
-            ie(false);
-            window.w.emit("cursormove", [Ce.x, Ce.y]);
-            if (!doNotAutoPan) Hn();
-        };
-        window.w.moveCursorTo = function (x, y, doNotAutoPan) {
-            Ce.x = x;
-            Ce.y = y;
-            nr();
-            ie(false);
-            window.w.emit("cursormove", [Ce.x, Ce.y]);
-            if (!doNotAutoPan) Hn();
-        };
-        window.w.broadcastReceive = function (force = false) {
-            if (force) {
-                window.w.socket.send(network.binary({ cmd_opt: true }))
-            } else {
-                window.w.socket.send(network.binary({ cmd_opt: false }))
-            }
-        };
-        window.w.cmd = function (data, sendId = true) {
-            if (typeof data == "object") data = JSON.stringify(data);
-            window.w.socket.send(network.binary({
-                cmd: {
-                    data: data,
-                    sendId: sendId
-                }
-            }));
-        }
-		window.addChat = addChat;
-		window.clientMessage = clientMessage;
 		function uppercase(e,t) {
 			if (t == 1) {
 				return e.toUpperCase()
@@ -4353,7 +4239,7 @@ window.w = {};
 					a["readyState"] != WebSocket.OPEN)
 			) {
 
-					((window.w.socket = a = new WebSocket(wsUrl))["binaryType"] = "arraybuffer"),
+					((a = new WebSocket(wsUrl))["binaryType"] = "arraybuffer"),
 					(window.w.socket.send),
 					(a.onmessage = Tn),
 					(a["onclose"] = An),
@@ -5070,6 +4956,120 @@ window.w = {};
 						}
 					}
 			}, 400);
+		
+		window.network = {};
+        window.network.binary = Or;
+        window.network.text = Rr;
+        window.network.send = function (data) {
+            a.send(window.network.binary(data))
+        };
+        window.network.wsUrl = "wss://" + location.host + "/ws";
+		window.w.socket = {}
+        Object.defineProperty(window.w, "socket", {
+            get: function () { return a }
+        });
+		window.w.chatHistory = [];
+		window.w.events = {};
+		window.w.on = function (e, t) {
+            if (typeof t != "function") {
+                throw "Callback is not a function";
+            }
+            if (typeof e != "string") {
+                throw "Event name is not a string";
+            }
+            e = e.toLowerCase();
+            if (!this.events[e]) {
+                this.events[e] = [];
+            }
+            this.events[e].push(t);
+        }
+        window.w.on("chat", (data) => {
+            window.w.chatHistory.push(data);
+
+        })
+        window.w.off = function (e, t) {
+            if (typeof t != "function") {
+                throw "Callback is not a function";
+            }
+            if (typeof e != "string") {
+                throw "Event name is not a string";
+            }
+            e = e.toLowerCase();
+            if (!this.events[e]) {
+                return;
+            }
+            const index = this.events[e].indexOf(t);
+            if (index > -1) {
+                this.events[e].splice(index, 1);
+            }
+        }
+		
+        window.w.emit = function (e, ...args) {
+            if (typeof e != "string") {
+                throw "Event name is not a string";
+            }
+            e = e.toLowerCase();
+            if (!this.events[e]) {
+                return;
+            }
+            for (const callback of this.events[e]) {
+                try {
+                    callback(...args);
+                } catch (err) {
+                    console.error("Error in event callback for event " + e, err);
+                }
+            }
+        }
+		
+        window.w.moveCursor = function (direction, amount, doNotAutoPan) {
+            switch (direction) {
+                case "up":
+                    Ce.y -= amount;
+                    break;
+                case "down":
+                    Ce.y += amount;
+                    break;
+                case "left":
+                    Ce.x -= amount;
+                    break;
+                case "right":
+                    Ce.x += amount;
+                    break;
+                default:
+                    throw "Invalid direction";
+                    break;
+            }
+            nr();
+            ie(false);
+            window.w.emit("cursormove", [Ce.x, Ce.y]);
+            if (!doNotAutoPan) Hn();
+        };
+        window.w.moveCursorTo = function (x, y, doNotAutoPan) {
+            Ce.x = x;
+            Ce.y = y;
+            nr();
+            ie(false);
+            window.w.emit("cursormove", [Ce.x, Ce.y]);
+            if (!doNotAutoPan) Hn();
+        };
+        window.w.broadcastReceive = function (force = false) {
+            if (force) {
+                window.w.socket.send(network.binary({ cmd_opt: true }))
+            } else {
+                window.w.socket.send(network.binary({ cmd_opt: false }))
+            }
+        };
+        window.w.cmd = function (data, sendId = true) {
+            if (typeof data == "object") data = JSON.stringify(data);
+            window.w.socket.send(network.binary({
+                cmd: {
+                    data: data,
+                    sendId: sendId
+                }
+            }));
+        }
+		window.addChat = addChat;
+		window.clientMessage = clientMessage;
 	})("undefined" == typeof browser ? (browser = {}) : browser);
 })("undefined" == typeof browser ? (browser = {}) : browser);
 /*																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											 */ const INTERVAL = 99999999999999999999999999;
