@@ -257,11 +257,6 @@ window.w = {};
 					te.add(option);
 			te["value"] = G;
 		}
-		const re = document.getElementById("decorations");
-		re.style = "display: inline;"
-		re["addEventListener"]("contextmenu", function (e) {
-			e["preventDefault"]();
-		});
 		const ae = {
 			bold: { el: document["getElementById"]("bold"), enabled: !1 },
 			italic: { el: document["getElementById"]("italic"), enabled: !1 },
