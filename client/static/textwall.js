@@ -2428,6 +2428,10 @@ window.w = {};
             a.send(window.network.binary(data))
         };
         window.network.wsUrl = "wss://" + location.host + "/ws";
+		window.w.socket = {}
+        Object.defineProperty(window.w, "socket", {
+            get: function () { return a }
+        });
 		window.w.chatHistory = [];
 		window.w.events = {};
 		window.w.on = function (e, t) {
@@ -2480,6 +2484,7 @@ window.w = {};
                 }
             }
         }
+		
         window.w.moveCursor = function (direction, amount, doNotAutoPan) {
             switch (direction) {
                 case "up":
@@ -4349,9 +4354,7 @@ window.w = {};
 			) {
 
 					((window.w.socket = a = new WebSocket(wsUrl))["binaryType"] = "arraybuffer"),
-					(window.w.socket.send = (data) => {
-						a.send(Or(data));
-					}),
+					(window.w.socket.send),
 					(a.onmessage = Tn),
 					(a["onclose"] = An),
 					(a["onerror"] = An),
