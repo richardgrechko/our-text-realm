@@ -118,36 +118,14 @@ h3 {
 
 
 
-.bubbles-container {
-  top: 10px;
-  display: flex;
-  align-items: flex-start;
-  gap: 0;
-  padding-left: 0;
-  margin-top: 10px;
-   position: fixed;
-  left: 10px;
-  transition: transform .12s ease;
-  z-index: 1000; 
-  pointer-events: none; 
-}
-
-.bubbles-container .bubble,
-.bubbles-container .bubble * {
-  pointer-events: auto;
-}
-
-
-#bubbles {
-  display: flex;
-  flex-flow: column nowrap;
-  gap: 10px;
-  margin-left: 0;
-  transition: margin-left .12s ease, transform .12s ease, background-color .28s ease;
-  align-items: flex-start; 
-}
-body.menu-open #bubbles {
-  transform: translateX(300px); /* match sidemenu width */
+#headline {
+    border: 1px solid rgba(49, 49, 49, 0.7);
+    background-image: var(--btn-dim);
+    color: #fff;
+    padding:0;
+    border-radius: 0 10px 10px 0;
+	display: flex;
+	flex-direction: column;
 }
 
 .separator {
@@ -202,7 +180,7 @@ body.menu-open #bubbles {
     top: 10px;
     left: 0;
     padding: 5px 10px;
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 0 10px 0;
     width: 280px;
     height: 540px;
     max-height: 70vh;
