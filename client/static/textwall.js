@@ -4240,7 +4240,6 @@ window.w = {};
 			) {
 
 					((a = new WebSocket(wsUrl))["binaryType"] = "arraybuffer"),
-					(window.w.socket.send),
 					(a.onmessage = Tn),
 					(a["onclose"] = An),
 					(a["onerror"] = An),
