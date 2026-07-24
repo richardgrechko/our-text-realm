@@ -2441,7 +2441,7 @@ window.w = {};
             }
             this.events[e].push(t);
         }
-        window.w.on("msg", (data) => {
+        window.w.on("chat", (data) => {
             window.w.chatHistory.push(data);
 
         })
