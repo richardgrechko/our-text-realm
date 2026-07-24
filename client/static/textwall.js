@@ -2420,6 +2420,7 @@ window.w = {};
 			document.getElementById("connecting2").append(a);
 			c.onclick = Kr;
 		}
+		
 		window.network = {};
         window.network.binary = Or;
         window.network.text = Rr;
@@ -2428,6 +2429,7 @@ window.w = {};
         };
         window.network.wsUrl = "wss://" + location.host + "/ws";
 		window.w.chatHistory = [];
+		window.w.events = {};
 		window.w.on = function (e, t) {
             if (typeof t != "function") {
                 throw "Callback is not a function";
@@ -2461,6 +2463,7 @@ window.w = {};
                 this.events[e].splice(index, 1);
             }
         }
+		
         window.w.emit = function (e, ...args) {
             if (typeof e != "string") {
                 throw "Event name is not a string";
