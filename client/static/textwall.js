@@ -1888,12 +1888,6 @@ window.w = {};
 					M.classList["remove"]("open");
 				}
 			),
-			document["getElementById"]("closeshortcut").addEventListener(
-				"click",
-				function () {
-					document.getElementById("shortcuts").classList["remove"]("open");
-				}
-			),
 			document
 				.getElementById("tpwordgo")
 				["addEventListener"]("click", function (e) {
@@ -5076,15 +5070,6 @@ window.w = {};
 function write(text) {
 	for (var char of text) writeChar(char, 1)
 }
-document.addEventListener("keydown", function (event) {
-	if (event.ctrlKey && event.key === "/") {
-		if (document.getElementById("shortcuts").className == "open") {
-			document.getElementById("shortcuts").className = "";
-		} else {
-			document.getElementById("shortcuts").className = "open";
-		}
-	}
-});
 var owner = document.getElementById("owner");
 function checkAdminWall(wall) {
 	if (["@Richard","@ThatRedmiNoteGuy","@317"].includes(wall)) {
