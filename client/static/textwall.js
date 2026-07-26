@@ -1293,7 +1293,7 @@
 					i = document["getElementById"]("password2");
 				mn["test"](r["value"]) ? 0 != r.value.length ? 0 != o["value"]["length"] ? o.value == i["value"] ? (vn(!0), a["send"](Or({
 					register: [r["value"], o.value]
-				})), client.username = r.value) : ir("Passwords do not match.", 3e3) : ir("Please type a password.", 3e3) : ir("Please type a username.", 3e3) : ir("Invalid username!", 3e3)
+				})), je = r.value) : ir("Passwords do not match.", 3e3) : ir("Please type a password.", 3e3) : ir("Please type a username.", 3e3) : ir("Invalid username!", 3e3)
 			}
 		})), document.getElementById("login")["addEventListener"]("submit", fn), document["getElementById"]("register")["addEventListener"]("submit", fn), document.getElementById("accsettinglink")["addEventListener"]("click", (function() {
 			var e = n,
@@ -2486,7 +2486,7 @@ function validRGB(r,g,b) {
 						}
 						E["fillRect"](x, w, r, a)
 					}
-					if (E["fillStyle"] = be, kt(y = Math["round"](10 * Ce["rawx"] * v), g = Math["round"](20 * Ce["rawy"] * v), r, a), tt["shownametags"].checked && !tt["anonymous"]["checked"] && (gt(E), Mt((client.username == client.displayname) ? client.username : `${client.displayname}\n(${client.username})`, y, g, o)), Je && $e["start"] && $e["end"]) {
+					if (E["fillStyle"] = be, kt(y = Math["round"](10 * Ce["rawx"] * v), g = Math["round"](20 * Ce["rawy"] * v), r, a), tt["shownametags"].checked && !tt["anonymous"]["checked"] && (gt(E), Mt(je, y, g, o)), Je && $e["start"] && $e["end"]) {
 						E.fillStyle = "rgba(0,120,212,0.5)", y = Math["round"](10 * Math["min"]($e["start"].x, $e.end.x) * v), g = Math.round(20 * Math.min($e["start"].y, $e["end"].y) * v);
 						var S = Math.round(10 * Math.max($e["start"].x, $e["end"].x) * v - y + 10 * v),
 							I = Math.round(20 * Math["max"]($e["start"].y, $e["end"].y) * v - g + 20 * v);
