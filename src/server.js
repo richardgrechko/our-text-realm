@@ -2340,12 +2340,6 @@ function init_ws() {
 				}
 			} else if ("register" == packetType) {
 				if (sdata.isAuthenticated) return;
-				if (!sdata.isAuthenticated) {
-					send(ws, encodeMsgpack({
-						alert: "Registration is closed."
-					}));
-					return
-				}
 				var cred = data.register;
 
 				if (!Array.isArray(cred)) return;
