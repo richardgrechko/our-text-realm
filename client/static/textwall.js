@@ -2019,27 +2019,98 @@ function validRGB(r,g,b) {
 
 		function Vn(e, t, r, a) {
 			var o = n;
-			if (ie(!1), performance["now"]() - qn >= 100 && (qn = performance.now(), zn = 0), !e || zn >= 3) return 0;
-			zn++;
+			if (
+				(ie(!1),
+				performance["now"]() - qn >= 100 &&
+					((qn = performance.now()), (zn = 0)),
+				!e || zn >= 3)
+			)
+				return 0;
 			var i = (e = Array.from(e)[0])["codePointAt"]();
-			if (nt["disableBraille"]["checked"] && qr(i)) return 0;
+		 // if (nt["disableBraille"]["checked"] && qr(i)) return 0;
 			var c = 20 * Math["floor"](Ce.x / 20),
 				l = 10 * Math["floor"](Ce.y / 10),
 				u = c + "," + l;
 			if (!we["has"](u)) return 0;
 			var s = we["get"](u);
-			if ((s.protected || nt["readOnly"]["checked"] || U && "" == je) && !m && 0 == j || null == s["txt"] || K) return U && "" == je && !nt["readOnly"]["checked"] && ir("Please log in before typing.", 3e3), 0;
-			tt.rainbow["checked"] && !r && (mr(Jn[Yn]), ++Yn == Jn.length && (Yn = 0));
-			var d, f, v, h, y, g, p, b, x, w, M, k, E, S = 1,
+			if (
+				((s.protected ||
+					nt["readOnly"]["checked"] ||
+					(U && !window.w.registered)) &&
+					!m &&
+					0 == j) ||
+				null == s["txt"] ||
+				K
+			)
+				return (
+					U &&
+						!window.w.registered &&
+						!nt["readOnly"]["checked"] &&
+						ir("Please log in before typing.", 3e3),
+					0
+				);
+			tt.rainbow["checked"] &&
+				!r &&
+				(mr(Jn[Yn]), ++Yn == Jn.length && (Yn = 0));
+			var d,
+				f,
+				v,
+				h,
+				y,
+				g,
+				p,
+				b,
+				x,
+				w,
+				M,
+				k,
+				E,
+				S = 1,
 				I = a ? 0 : ce(),
-				C = Vr(pe, I),
+				C = Vr(window.w.color, I),
 				A = Ce.x - c + 20 * (Ce.y - l),
 				T = s["clr"][A],
 				B = Zr(T),
 				F = B[0],
 				P = B[1],
 				L = s.txt[A];
-			return L == e && T == C || Qn(e, I) && Qn(L, P) || (M = P, k = e, E = I, Gn(L) && Gn(k) && (2 & M) == (2 & E) && (1 & M) == (1 & E) && F == pe) || (r ? (g = Ce.x, p = Ce.y, b = s["txt"][A], x = T, w = o, Fe.unshift([g, p, b, x]), Fe[w(500)] > 1e3 && Fe[w(493)]()) : (d = Ce.x, f = Ce.y, v = s["txt"][A], h = T, Be[(y = o)(343)]([d, f, v, h]), Be[y(500)] > 1e3 && Be[y(493)]()), s["txt"][A] = e, s.clr[A] = C, Me.push([c / 20, l / 10, e.codePointAt(), A, C]), S = 2, It(u, Dt(A))), Ce["lastedit"].x = Ce.x, Ce["lastedit"].y = Ce.y, Ce.x += t, Hn(), S
+			return (
+				(L == e && T == C) ||
+					(Qn(e, I) && Qn(L, P)) ||
+					((M = P),
+					(k = e),
+					(E = I),
+					Gn(L) &&
+						Gn(k) &&
+						(16 & M) == (16 & E) &&
+						(2 & M) == (2 & E) &&
+						(1 & M) == (1 & E) &&
+						F == window.w.color) ||
+					(r
+						? ((g = Ce.x),
+							(p = Ce.y),
+							(b = s["txt"][A]),
+							(x = T),
+							(w = o),
+							Fe.unshift([g, p, b, x]),
+							Fe["length"] > 1e3 && Fe["pop"]())
+						: ((d = Ce.x),
+							(f = Ce.y),
+							(v = s["txt"][A]),
+							(h = T),
+							Be["unshift"]([d, f, v, h]),
+							Be["length"] > 1e3 && Be["pop"]()),
+					(s["txt"][A] = e),
+					(s.clr[A] = C),
+					window.writeBuffer.push([c / 20, l / 10, e.codePointAt(), A, C]),
+					(S = 2),
+					It(u, Dt(A))),
+				(Ce["lastedit"].x = Ce.x),
+				(Ce["lastedit"].y = Ce.y),
+				(Ce.x += t),
+				Hn(),
+				S
+			);
 		}
 
 		function Zn(e, t) {
