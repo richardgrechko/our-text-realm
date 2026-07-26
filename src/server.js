@@ -598,24 +598,7 @@ function mask_ip(ip) {
 		return ip.replace(/^(\d+)\.\d+\.\d+\.\d+$/, "$1.X.X.X");
 	}
 }
-const WHITELIST_FILE = settings.db.whitelistPath
 
-function loadWhitelist() {
-	try {
-		return JSON.parse(fs.readFileSync(WHITELIST_FILE));
-	} catch {
-		return [false, []];
-	}
-}
-
-function saveWhitelist(data) {
-	fs.writeFileSync(WHITELIST_FILE, JSON.stringify(data, null, 2));
-}
-function isWhitelisted(username) {
-    const [enabled, users] = loadWhitelist();
-    if (!enabled) return true; // whitelist disabled, allow all
-    return users.includes(username);
-}
 var httpServer;
 async function runserver() {
 	var twrApp = express();
@@ -1055,33 +1038,6 @@ async function runserver() {
 
 		res.json({ page, pageSize, totalItems, totalPages, data });
 	}, { get: true });
-	createAdminRequest("whitelist/add", (req, res) => {
-		const { user } = req.body;
-		if (!user) return res.status(400).send("Missing 'user'");
-		const wl = loadWhitelist();
-		if (!wl[1].includes(user)) wl[1].push(user);
-		saveWhitelist(wl);
-		res.json(wl);
-	})
-	createAdminRequest("whitelist/remove", (req, res) => {
-		const { user } = req.body;
-		if (!user) return res.status(400).send("Missing 'user'");
-		const wl = loadWhitelist();
-		wl[1] = wl[1].filter(u => u !== user);
-		saveWhitelist(wl);
-		res.json(wl);
-	})
-	createAdminRequest("whitelist/toggle", (req, res) => {
-		const { toggle } = req.body;
-		const wl = loadWhitelist();
-		wl[0] = Boolean(toggle);
-		saveWhitelist(wl);
-		res.json(wl);
-	})
-	createAdminRequest("whitelist/list", (req, res) => {
-		const wl = loadWhitelist();
-		res.json(wl);
-	}, {get: true})
 	const adminPath = path.join(__dirname, "../admin");
 	twrApp.use("/admin", express.static(adminPath));
 	/*twrApp.get(/^\/admin(\/.*)?$/, (req, res) => {
@@ -1858,7 +1814,7 @@ function init_ws() {
 				// never send if on anonymous mode
 				if (anonymous.includes(sdata.clientId.toLowerCase())) return;
 				if (sdata.worldAttr.private && !sdata.isMember) return;
-				if (!sdata.isAuthenticated || !isWhitelisted(sdata.authUser)) {
+				if (!sdata.isAuthenticated) {
 					return;
 				}
 
@@ -1897,7 +1853,7 @@ function init_ws() {
 					}))
 					return;
 				}
-				if (!sdata.isAuthenticated || !isWhitelisted(sdata.authUser)) {send(ws, encodeMsgpack({
+				if (!sdata.isAuthenticated) {send(ws, encodeMsgpack({
 						alert: "You are not authorized"
 					}))
 					return;}
@@ -1953,7 +1909,7 @@ function init_ws() {
 
 				if (typeof message != "string") return;
 				if (message.length > 256) return;
-				if (!sdata.isAuthenticated || !isWhitelisted(sdata.authUser)) {
+				if (!sdata.isAuthenticated) {
 					send(ws, encodeMsgpack({
 						msg: ["System", 0, "You're unauthorized.", false]
 					}));
