@@ -2067,7 +2067,7 @@ function validRGB(r,g,b) {
 				E,
 				S = 1,
 				I = a ? 0 : ce(),
-				C = Vr(window.w.color, I),
+				C = Vr(pe, I),
 				A = Ce.x - c + 20 * (Ce.y - l),
 				T = s["clr"][A],
 				B = Zr(T),
@@ -2085,7 +2085,7 @@ function validRGB(r,g,b) {
 						(16 & M) == (16 & E) &&
 						(2 & M) == (2 & E) &&
 						(1 & M) == (1 & E) &&
-						F == window.w.color) ||
+						F == pe) ||
 					(r
 						? ((g = Ce.x),
 							(p = Ce.y),
