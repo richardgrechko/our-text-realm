@@ -2016,7 +2016,7 @@ function validRGB(r,g,b) {
 			rainbowModeChange(e.target.value)
 			console.log(rainbowMode)
 		};
-
+		window.writeBuffer = [];
 		function Vn(e, t, r, a) {
 			var o = n;
 			if (
